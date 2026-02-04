@@ -1,0 +1,5 @@
+Implement a canary release:
+- Stable: nginx:1.14, 3 replicas
+- Canary: nginx:1.16, 1 replica
+- Both must share label app=web
+- Both must be served by existing Service (do not modify Service)

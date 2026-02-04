@@ -1,0 +1,5 @@
+In namespace `monitoring`, Pod `metrics-pod` uses `wrong-sa` and fails.
+
+Tasks:
+1. Identify the correct ServiceAccount (bound to a Role with pod permissions).
+2. Update Pod `metrics-pod` to use the correct ServiceAccount.

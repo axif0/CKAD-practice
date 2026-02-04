@@ -1,0 +1,38 @@
+# 1. Check namespace constraints
+kubectl describe limitrange -n haddock
+# Max memory: 512Mi -> Half = 256Mi
+
+# 2. Update the Deployment manifest
+cat <<EOF > /home/candidate/chief-cardinal/nosql.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nosql
+  namespace: haddock
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nosql
+  template:
+    metadata:
+      labels:
+        app: nosql
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            memory: "128Mi"
+          limits:
+            memory: "256Mi"
+EOF
+
+# 3. Apply
+kubectl apply -f /home/candidate/chief-cardinal/nosql.yaml
+
+# Verify
+kubectl get pod -n haddock -l app=nosql -o yaml | grep -A5 resources

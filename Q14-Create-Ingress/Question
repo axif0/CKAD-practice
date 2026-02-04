@@ -1,0 +1,6 @@
+In namespace `default`, Service `web-svc` exists on port 8080.
+
+Create Ingress `web-ingress`:
+- Host: web.example.com
+- Path: / (pathType: Prefix)
+- Backend: web-svc:8080

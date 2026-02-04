@@ -1,0 +1,11 @@
+# Identify SA
+kubectl describe rolebinding monitor-binding -n monitoring
+
+# Update Pod
+kubectl get pod metrics-pod -n monitoring -o yaml > /tmp/pod.yaml
+kubectl delete pod metrics-pod -n monitoring
+sed -i 's/serviceAccountName: wrong-sa/serviceAccountName: monitor-sa/' /tmp/pod.yaml
+kubectl apply -f /tmp/pod.yaml
+
+# Verify
+kubectl get pod metrics-pod -n monitoring -o yaml | grep serviceAccountName

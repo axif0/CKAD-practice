@@ -1,0 +1,5 @@
+In namespace `default`, Deployment `web-app` exists with Pods labeled app=webapp.
+
+Service `web-svc` has incorrect selector app=wrong.
+
+Task: Fix Service selector to correctly select Pods from web-app.

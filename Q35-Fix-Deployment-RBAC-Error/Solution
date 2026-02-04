@@ -1,0 +1,42 @@
+# 1. Check Pod logs for errors
+kubectl logs -n gorilla -l app=honeybee
+# Error: cannot list resource "pods"
+
+# 2. Find available ServiceAccounts and RoleBindings
+kubectl get sa -n gorilla
+kubectl get rolebindings -n gorilla -o yaml
+
+# 3. Identify the SA with correct permissions (honeybee-sa)
+kubectl describe rolebinding honeybee-binding -n gorilla
+
+# 4. Update the deployment manifest to use honeybee-sa
+cat <<EOF > /home/candidate/prompt-escargot/honeybee-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: honeybee-deployment
+  namespace: gorilla
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: honeybee
+  template:
+    metadata:
+      labels:
+        app: honeybee
+    spec:
+      serviceAccountName: honeybee-sa
+      containers:
+      - name: kubectl
+        image: bitnami/kubectl:latest
+        command: ["/bin/sh", "-c"]
+        args: ["while true; do kubectl get pods -n gorilla; sleep 10; done"]
+EOF
+
+# 5. Apply updated deployment
+kubectl apply -f /home/candidate/prompt-escargot/honeybee-deployment.yaml
+
+# 6. Verify - wait for new pod and check logs
+kubectl rollout status deploy honeybee-deployment -n gorilla
+kubectl logs -n gorilla -l app=honeybee

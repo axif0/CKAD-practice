@@ -1,0 +1,6 @@
+In namespace `default`, Deployment `api-server` exists with Pods labeled app=api.
+
+Create Service `api-nodeport`:
+- Type: NodePort
+- Selector: app=api
+- Service port 80, target port 9090

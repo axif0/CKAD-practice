@@ -1,0 +1,52 @@
+# 1. Find the hardcoded values
+kubectl get deploy postgres -n relaxed-shark -o yaml | grep -A2 "env:"
+
+# 2. Create Secret with the values
+kubectl create secret generic postgres -n relaxed-shark \
+  --from-literal=username=admin \
+  --from-literal=database=mydb \
+  --from-literal=password=secretpass123
+
+# 3. Update Deployment to use Secret
+kubectl apply -f - <<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: relaxed-shark
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:14
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: username
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: database
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres
+              key: password
+        ports:
+        - containerPort: 5432
+EOF
+
+# Verify
+kubectl get secret postgres -n relaxed-shark
+kubectl describe deploy postgres -n relaxed-shark | grep -A10 Environment

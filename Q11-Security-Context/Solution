@@ -1,0 +1,17 @@
+# Edit deployment
+kubectl edit deploy secure-app
+
+# Add Pod-level:
+# spec:
+#   template:
+#     spec:
+#       securityContext:
+#         runAsUser: 1000
+#       containers:
+#       - name: nginx
+#         securityContext:
+#           capabilities:
+#             add: ["NET_ADMIN"]
+
+# Verify
+kubectl get pod -l app=secure-app -o yaml | grep -A10 securityContext

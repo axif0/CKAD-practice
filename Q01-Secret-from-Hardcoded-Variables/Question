@@ -1,0 +1,7 @@
+In namespace `default`, Deployment `api-server` exists with hard-coded environment variables:
+- DB_USER=admin
+- DB_PASS=Secret123!
+
+Tasks:
+1. Create a Secret named `db-credentials` containing these credentials.
+2. Update Deployment `api-server` to use the Secret via `valueFrom.secretKeyRef`.

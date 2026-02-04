@@ -1,0 +1,44 @@
+# 1. Check deprecated APIs
+kubectl api-versions
+
+# 2. Fix the manifest - change extensions/v1beta1 to apps/v1 and add selector
+cat <<EOF > /home/candidate/credible-mite/web.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: garfish
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.19
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-svc
+  namespace: garfish
+spec:
+  selector:
+    app: web
+  ports:
+  - port: 80
+    targetPort: 80
+EOF
+
+# 3. Deploy
+kubectl apply -f /home/candidate/credible-mite/web.yaml
+
+# 4. Verify
+kubectl get deploy,svc -n garfish

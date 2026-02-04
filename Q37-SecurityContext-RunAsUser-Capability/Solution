@@ -1,0 +1,35 @@
+# Update the manifest file
+cat <<EOF > /home/candidate/daring-moccasin/store-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-deployment
+  namespace: grubworm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: store
+  template:
+    metadata:
+      labels:
+        app: store
+    spec:
+      securityContext:
+        runAsUser: 10000
+      containers:
+      - name: store
+        image: nginx
+        ports:
+        - containerPort: 80
+        securityContext:
+          capabilities:
+            add:
+            - NET_BIND_SERVICE
+EOF
+
+# Apply
+kubectl apply -f /home/candidate/daring-moccasin/store-deployment.yaml
+
+# Verify
+kubectl get pod -n grubworm -l app=store -o yaml | grep -A10 securityContext

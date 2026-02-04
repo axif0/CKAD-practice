@@ -1,0 +1,6 @@
+In namespace `prod`, a ResourceQuota exists.
+
+Tasks:
+1. Check the ResourceQuota limits.
+2. Create Pod `resource-pod` (nginx) with limits set to half the quota.
+3. Set appropriate requests (at least 100m CPU and 128Mi memory).

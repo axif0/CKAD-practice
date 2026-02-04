@@ -1,0 +1,12 @@
+# 1. Check existing NetworkPolicies
+kubectl get netpol -n charming-macaw -o yaml
+
+# 2. Identify required labels from NetworkPolicy podSelector
+# NetworkPolicy selects pods with role=middle
+
+# 3. Update newpod labels
+kubectl label pod newpod -n charming-macaw role=middle --overwrite
+
+# 4. Verify
+kubectl get pods -n charming-macaw --show-labels
+kubectl describe netpol allow-middle-traffic -n charming-macaw

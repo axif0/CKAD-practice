@@ -1,0 +1,9 @@
+First, create a single new Secret named `postgres` in the `relaxed-shark` namespace.
+
+It must contain the three pieces of secret information currently hard-coded in 
+Pod environment variables in the Deployment `postgres` running in the `relaxed-shark` namespace.
+
+Use the keys: `username`, `database`, and `password`.
+
+Next, modify the Deployment so that:
+- The environment variables are sourced from the Secret instead of hard-coded values

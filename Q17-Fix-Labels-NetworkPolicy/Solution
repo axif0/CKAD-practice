@@ -1,0 +1,10 @@
+# Inspect policies
+kubectl get netpol -o yaml
+
+# Apply labels
+kubectl label pod db-pod app=db --overwrite
+kubectl label pod api-pod app=api --overwrite
+kubectl label pod monitor-pod role=monitor --overwrite
+
+# Verify
+kubectl get pods --show-labels

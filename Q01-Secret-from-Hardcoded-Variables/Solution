@@ -1,0 +1,11 @@
+# 1. Create Secret
+kubectl create secret generic db-credentials \
+  --from-literal=DB_USER=admin \
+  --from-literal=DB_PASS=Secret123! \
+  -n default
+
+# 2. Update Deployment to use Secret
+kubectl set env deploy/api-server --from=secret/db-credentials --prefix="" -n default
+
+# Verify
+kubectl get deploy api-server -o yaml | grep -A10 env

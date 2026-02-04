@@ -1,0 +1,35 @@
+# Update the manifest
+cat <<EOF > /home/candidate/spicy-pikachu/app-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  namespace: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: app
+        image: nginx
+        ports:
+        - containerPort: 8081
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 6
+          periodSeconds: 3
+EOF
+
+# Apply
+kubectl apply -f /home/candidate/spicy-pikachu/app-deployment.yaml
+
+# Verify
+kubectl describe deploy app-deployment -n prod | grep -A5 Readiness

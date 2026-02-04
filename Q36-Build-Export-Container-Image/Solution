@@ -1,0 +1,15 @@
+# Option 1: Using Podman
+cd /home/candidate/build
+podman build -t macaque:1.2 .
+podman save -o /home/candidate/macaque-1.2.tar macaque:1.2
+
+# Option 2: Using Docker
+# docker build -t macaque:1.2 .
+# docker save -o /home/candidate/macaque-1.2.tar macaque:1.2
+
+# Option 3: Using Buildah
+# buildah bud -t macaque:1.2 .
+# buildah push macaque:1.2 oci-archive:/home/candidate/macaque-1.2.tar
+
+# Verify
+ls -lh /home/candidate/macaque-1.2.tar

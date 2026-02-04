@@ -1,0 +1,6 @@
+Create a new ServiceAccount named `scraper` in the namespace `cute-panda`.
+
+Review the existing Roles in the `cute-panda` namespace, and bind the best-fitting Role
+to the new ServiceAccount `scraper`.
+
+Finally, update the `scraper` Deployment to use the new ServiceAccount `scraper`.

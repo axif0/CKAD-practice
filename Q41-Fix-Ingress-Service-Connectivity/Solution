@@ -1,0 +1,35 @@
+# 1. Identify issues
+kubectl get pods -n content-marlin --show-labels
+kubectl get svc -n content-marlin -o yaml
+kubectl get ep -n content-marlin  # Empty = wrong selector
+kubectl get ingress -n content-marlin -o yaml
+
+# 2. Fix Service selector
+kubectl patch svc content-marlin-svc -n content-marlin -p '{"spec":{"selector":{"app":"content-marlin"}}}'
+
+# 3. Fix Service port if needed and update Ingress backend port
+cat <<EOF > /home/candidate/content-marlin/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: content-marlin-ingress
+  namespace: content-marlin
+spec:
+  rules:
+  - host: content-marlin.local
+    http:
+      paths:
+      - path: /content-marlin
+        pathType: Prefix
+        backend:
+          service:
+            name: content-marlin-svc
+            port:
+              number: 8080
+EOF
+
+kubectl apply -f /home/candidate/content-marlin/ingress.yaml
+
+# Verify
+kubectl get ep content-marlin-svc -n content-marlin
+kubectl describe ingress content-marlin-ingress -n content-marlin

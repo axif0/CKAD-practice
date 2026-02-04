@@ -1,0 +1,5 @@
+In namespace `default`, Deployment `secure-app` exists.
+
+Tasks:
+1. Set Pod-level runAsUser: 1000.
+2. Add container-level capability NET_ADMIN.

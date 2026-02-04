@@ -1,0 +1,30 @@
+# 1. Scale Stable
+kubectl scale deploy web-stable --replicas=3
+
+# 2. Create Canary
+kubectl apply -f - <<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-canary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+      version: canary
+  template:
+    metadata:
+      labels:
+        app: web
+        version: canary
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.16
+EOF
+
+# 3. Verify
+kubectl get deploy
+kubectl get pods --show-labels
+kubectl get endpoints web-svc  # Expect 4 IPs (3 stable + 1 canary)

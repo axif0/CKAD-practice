@@ -1,0 +1,26 @@
+# Check quota
+kubectl describe quota -n prod
+
+# Create Pod (quota: 2 CPU, 4Gi -> half: 1 CPU, 2Gi)
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-pod
+  namespace: prod
+spec:
+  containers:
+  - name: web
+    image: nginx
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "1"
+        memory: "2Gi"
+EOF
+
+# Verify
+kubectl get pod resource-pod -n prod
+kubectl describe quota -n prod

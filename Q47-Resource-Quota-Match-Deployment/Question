@@ -1,0 +1,15 @@
+Update the `nginx-resources` Deployment in the namespace with the following resource settings:
+
+Requests:
+- 100m CPU requests
+- 128Mi memory requests
+
+Limits:
+- Set the limits to double the resource requests for CPU and memory
+
+Next, ensure that the total amount of resources in the namespace matches 
+the maximum resources the Pods from the `nginx-resources` Deployment can request.
+
+Note:
+- Do not delete the existing Deployment
+- Failure to do so will result in a reduced score

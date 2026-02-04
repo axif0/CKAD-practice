@@ -1,0 +1,19 @@
+# 1. Scale to 2 replicas
+kubectl scale deploy nginx-deployment --replicas=2 -n prod
+
+# 2. Add label to Pod template
+kubectl patch deploy nginx-deployment -n prod --type=json -p='[
+  {"op": "add", "path": "/spec/template/metadata/labels/role", "value": "webFrontEnd"}
+]'
+
+# OR edit manually:
+# kubectl edit deploy nginx-deployment -n prod
+# Add role: webFrontEnd to spec.template.metadata.labels
+
+# 3. Create NodePort Service
+kubectl expose deploy nginx-deployment --name=rover --type=NodePort --port=80 -n prod
+
+# Verify
+kubectl get deploy nginx-deployment -n prod
+kubectl get pods -n prod --show-labels
+kubectl get svc rover -n prod

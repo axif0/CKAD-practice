@@ -1,0 +1,13 @@
+Create a CronJob named `grep` that executes a Pod running the following single container:
+  name: busybox
+  image: busybox:stable
+  command: ["grep", "-i", "nameserver", "/etc/resolv.conf"]
+
+Configure the CronJob to:
+- execute once every 30 minutes
+- keep 96 completed Jobs
+- keep 192 failed Jobs
+- never restart Pods
+- terminate Pods after 8 seconds
+
+Manually create and execute one Job named `grep-test` from the `grep` CronJob for testing purposes.

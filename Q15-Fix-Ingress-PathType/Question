@@ -1,0 +1,5 @@
+File `/root/fix-ingress.yaml` contains an Ingress with invalid pathType.
+
+Tasks:
+1. Fix pathType to a valid value (Prefix, Exact, or ImplementationSpecific).
+2. Apply the fixed manifest.

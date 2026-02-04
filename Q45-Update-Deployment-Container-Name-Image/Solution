@@ -1,0 +1,18 @@
+# Edit the Deployment (do NOT delete it)
+kubectl edit deploy busybox -n rapid-goat
+
+# Change:
+# - containers[0].name: box -> musl
+# - containers[0].image: busybox:latest -> busybox:musl
+
+# OR use patch for container name and set image for image:
+kubectl patch deploy busybox -n rapid-goat --type=json -p='[
+  {"op": "replace", "path": "/spec/template/spec/containers/0/name", "value": "musl"},
+  {"op": "replace", "path": "/spec/template/spec/containers/0/image", "value": "busybox:musl"}
+]'
+
+# Ensure rollout
+kubectl rollout status deploy busybox -n rapid-goat
+
+# Verify
+kubectl get deploy busybox -n rapid-goat -o yaml | grep -A5 containers

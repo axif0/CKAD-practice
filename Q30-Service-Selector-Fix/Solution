@@ -1,0 +1,12 @@
+k get svc
+k get ep store-svc
+k describe svc store-svc
+#Selector:                 WRONG=label
+k get pods --show-labels
+#app=store
+k edit svc store-svc
+k get ep
+k describe svc store-svc
+#Selector:                 app=store
+
+

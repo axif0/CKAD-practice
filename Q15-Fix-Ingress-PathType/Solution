@@ -1,0 +1,8 @@
+# Fix pathType
+sed -i 's/pathType: Invalid/pathType: Prefix/' /root/fix-ingress.yaml
+
+# Apply
+kubectl apply -f /root/fix-ingress.yaml
+
+# Verify
+kubectl get ingress broken-ingress

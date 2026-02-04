@@ -1,0 +1,10 @@
+# Check NetworkPolicies
+kubectl get netpol -n network-demo -o yaml
+
+# Fix labels
+kubectl label pod frontend -n network-demo role=frontend --overwrite
+kubectl label pod backend -n network-demo role=backend --overwrite
+kubectl label pod database -n network-demo role=db --overwrite
+
+# Verify
+kubectl get pods -n network-demo --show-labels

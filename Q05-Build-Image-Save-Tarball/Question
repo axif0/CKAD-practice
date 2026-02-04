@@ -1,0 +1,5 @@
+Use existing Dockerfile in /root/app-source.
+
+Tasks:
+1. Build image `my-app:1.0` using Podman.
+2. Save to `/root/my-app.tar`.

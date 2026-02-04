@@ -1,0 +1,8 @@
+Q17-Task
+
+In namespace default, a Service exists and the corresponding Pods are running.
+However, traffic is not reaching the Pods.
+
+Investigate and fix the Service selector so that traffic flows correctly.
+
+Do not create new Pods or Services.

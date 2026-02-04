@@ -1,0 +1,25 @@
+kubectl create ingress web-ingress --rule="web.example.com/=web-svc:8080" --annotation="nginx.ingress.kubernetes.io/rewrite-target=/"
+
+# OR
+kubectl apply -f - <<EOF
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+spec:
+  rules:
+  - host: web.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web-svc
+            port:
+              number: 8080
+EOF
+
+# Verify
+kubectl get ingress web-ingress
+kubectl describe ingress web-ingress

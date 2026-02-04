@@ -1,0 +1,10 @@
+# Check current state
+kubectl get pods --show-labels
+kubectl get svc web-svc -o yaml
+kubectl get endpoints web-svc
+
+# Fix selector
+kubectl patch svc web-svc -p '{"spec":{"selector":{"app":"webapp"}}}'
+
+# Verify
+kubectl get endpoints web-svc

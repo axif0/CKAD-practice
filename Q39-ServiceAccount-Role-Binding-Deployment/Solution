@@ -1,0 +1,22 @@
+# 1. Create ServiceAccount
+kubectl create sa scraper -n cute-panda
+
+# 2. Review existing Roles
+kubectl get roles -n cute-panda
+kubectl describe role pod-reader -n cute-panda
+kubectl describe role secret-admin -n cute-panda
+kubectl describe role config-viewer -n cute-panda
+
+# 3. Bind best-fitting Role (pod-reader for pod scraping)
+kubectl create rolebinding scraper-binding --role=pod-reader --serviceaccount=cute-panda:scraper -n cute-panda
+
+# 4. Update Deployment to use ServiceAccount
+kubectl patch deploy scraper -n cute-panda -p '{"spec":{"template":{"spec":{"serviceAccountName":"scraper"}}}}'
+
+# OR edit manually:
+# kubectl edit deploy scraper -n cute-panda
+# Add: spec.template.spec.serviceAccountName: scraper
+
+# Verify
+kubectl rollout status deploy scraper -n cute-panda
+kubectl logs -n cute-panda -l app=scraper

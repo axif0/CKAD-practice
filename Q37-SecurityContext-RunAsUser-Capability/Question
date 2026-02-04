@@ -1,0 +1,7 @@
+Modify the existing Deployment named `store-deployment`, running in namespace `grubworm`,
+so that its containers:
+- run with user ID 10000 and
+- have the NET_BIND_SERVICE capability added
+
+Note:
+- The store-deployment's manifest file can be found at /home/candidate/daring-moccasin/store-deployment.yaml

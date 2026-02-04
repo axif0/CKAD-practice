@@ -1,0 +1,12 @@
+kubectl create sa log-sa -n audit
+
+kubectl create role log-role --verb=get,list,watch --resource=pods -n audit
+
+kubectl create rolebinding log-rb --role=log-role --serviceaccount=audit:log-sa -n audit
+
+# Recreate Pod with SA
+kubectl delete pod log-collector -n audit
+kubectl run log-collector --image=nginx --serviceaccount=log-sa -n audit
+
+# Verify
+kubectl get pod log-collector -n audit -o yaml | grep serviceAccountName

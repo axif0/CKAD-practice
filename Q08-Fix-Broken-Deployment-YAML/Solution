@@ -1,0 +1,26 @@
+# Fix the file
+cat <<EOF > /root/broken-deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: broken-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: web
+          image: nginx
+EOF
+
+kubectl apply -f /root/broken-deploy.yaml
+
+# Verify
+kubectl get deploy broken-app
+kubectl rollout status deploy broken-app

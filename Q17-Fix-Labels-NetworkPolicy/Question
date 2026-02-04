@@ -1,0 +1,7 @@
+In namespace `default`, NetworkPolicies block traffic to `db-pod`.
+
+Fix labels on `api-pod`, `monitor-pod`, and `db-pod` so that:
+- api-pod can access db-pod
+- monitor-pod can access db-pod
+
+You may only modify Pod labels. Do not modify NetworkPolicies.

@@ -1,0 +1,20 @@
+k get deploy -n nov2025
+k edit deploy app -n nov2025
+
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 5%
+      maxUnavailable: 2%
+
+k rollout status deploy app -n nov2025
+k describe deploy app -n nov2025
+
+k set image deploy web1 -n nov2025 nginx=nginx:1.13
+k rollout status deploy web1 -n nov2025
+k describe deploy web1 -n nov2025
+
+k rollout undo deploy app -n nov2025
+k rollout history deploy app -n nov2025
+k describe deploy app -n nov2025
+

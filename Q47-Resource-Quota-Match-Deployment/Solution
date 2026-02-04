@@ -1,0 +1,37 @@
+# 1. Update Deployment resources
+kubectl patch deploy nginx-resources -n resource-test -p '{
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [{
+          "name": "nginx",
+          "resources": {
+            "requests": {"cpu": "100m", "memory": "128Mi"},
+            "limits": {"cpu": "200m", "memory": "256Mi"}
+          }
+        }]
+      }
+    }
+  }
+}'
+
+# 2. Calculate total resources for pods (replicas x per-pod)
+# With 2 replicas:
+# Total requests: 200m CPU, 256Mi memory
+# Total limits: 400m CPU, 512Mi memory
+
+# 3. Update ResourceQuota to match
+kubectl patch resourcequota compute-quota -n resource-test -p '{
+  "spec": {
+    "hard": {
+      "requests.cpu": "200m",
+      "requests.memory": "256Mi",
+      "limits.cpu": "400m",
+      "limits.memory": "512Mi"
+    }
+  }
+}'
+
+# Verify
+kubectl describe resourcequota compute-quota -n resource-test
+kubectl get pods -n resource-test

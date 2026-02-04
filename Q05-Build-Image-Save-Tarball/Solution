@@ -1,0 +1,7 @@
+cd /root/app-source
+podman build -t my-app:1.0 .
+podman save -o /root/my-app.tar my-app:1.0
+
+# Verify
+ls -lh /root/my-app.tar
+podman images | grep my-app

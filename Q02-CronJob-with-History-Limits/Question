@@ -1,0 +1,8 @@
+Create a CronJob named `backup-job` in namespace `default` with:
+- Schedule: */30 * * * *
+- Image: busybox:latest
+- Command: echo "Backup completed"
+- successfulJobsHistoryLimit: 3
+- failedJobsHistoryLimit: 2
+- activeDeadlineSeconds: 300
+- restartPolicy: Never

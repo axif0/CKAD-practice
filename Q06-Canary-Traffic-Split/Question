@@ -1,0 +1,6 @@
+In namespace `default`, Deployment `web-app` and Service `web-service` exist.
+
+Tasks:
+1. Scale existing `web-app` (v1) to 8 replicas.
+2. Create `web-app-canary` (v2) with 2 replicas.
+3. Ensure Service `web-service` selects both deployments.

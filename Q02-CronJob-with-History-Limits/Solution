@@ -1,0 +1,25 @@
+kubectl apply -f - <<EOF
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-job
+  namespace: default
+spec:
+  schedule: "*/30 * * * *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 300
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: backup
+              image: busybox:latest
+              command: ["/bin/sh", "-c", "echo Backup completed"]
+EOF
+
+# Verify
+kubectl get cronjob backup-job
+kubectl describe cronjob backup-job

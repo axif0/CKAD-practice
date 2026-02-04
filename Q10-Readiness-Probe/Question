@@ -1,0 +1,6 @@
+In namespace `default`, Deployment `api-deploy` exists.
+
+Add a readiness probe with:
+- httpGet: path /ready, port 8080
+- initialDelaySeconds: 5
+- periodSeconds: 10

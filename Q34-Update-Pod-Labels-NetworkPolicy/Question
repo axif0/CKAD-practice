@@ -1,0 +1,7 @@
+Update the Pod `newpod` in the `charming-macaw` namespace to use a NetworkPolicy
+allowing the Pod to send and receive traffic only to and from the Pods `front` and `db`.
+
+Note:
+- All required NetworkPolicies have already been created.
+- You must not create, delete, or edit any NetworkPolicy resources.
+- You may only modify Pod labels.

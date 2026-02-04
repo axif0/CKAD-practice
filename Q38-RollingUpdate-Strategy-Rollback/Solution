@@ -1,0 +1,21 @@
+# 1. Update rolling update strategy
+kubectl patch deploy webapp -n prod --type=json -p='[
+  {"op": "replace", "path": "/spec/strategy/rollingUpdate/maxSurge", "value": "5%"},
+  {"op": "replace", "path": "/spec/strategy/rollingUpdate/maxUnavailable", "value": "5%"}
+]'
+
+# OR edit manually:
+# kubectl edit deploy webapp -n prod
+# Change maxSurge: "5%" and maxUnavailable: "5%"
+
+# 2. Update image to 1.13
+kubectl set image deploy/webapp nginx=lfccncf/nginx:1.13 -n prod
+kubectl rollout status deploy webapp -n prod
+
+# 3. Rollback to previous version
+kubectl rollout undo deploy webapp -n prod
+kubectl rollout status deploy webapp -n prod
+
+# Verify
+kubectl get deploy webapp -n prod -o jsonpath='{.spec.template.spec.containers[0].image}'
+kubectl describe deploy webapp -n prod | grep -A2 RollingUpdate

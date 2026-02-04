@@ -1,0 +1,10 @@
+# 1. Scale existing
+kubectl scale deploy web-app --replicas=8
+
+# 2. Create Canary
+kubectl create deploy web-app-canary --image=nginx:latest --replicas=2
+kubectl label deploy web-app-canary app=webapp version=v2 --overwrite
+
+# 3. Verify
+kubectl get ep web-service
+kubectl get pods -l app=webapp --show-labels

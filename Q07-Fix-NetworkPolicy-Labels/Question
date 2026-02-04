@@ -1,0 +1,5 @@
+In namespace `network-demo`, NetworkPolicies exist that expect specific labels.
+
+Update Pod labels to enable flow: frontend -> backend -> database.
+
+You may only modify Pod labels. Do not modify NetworkPolicies.

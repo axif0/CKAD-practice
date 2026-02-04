@@ -1,0 +1,29 @@
+# 1. Create CronJob
+kubectl apply -f - <<EOF
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: grep
+spec:
+  schedule: "*/30 * * * *"
+  successfulJobsHistoryLimit: 96
+  failedJobsHistoryLimit: 192
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 8
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: busybox
+            image: busybox:stable
+            command: ["grep", "-i", "nameserver", "/etc/resolv.conf"]
+EOF
+
+# 2. Create test Job from CronJob
+kubectl create job grep-test --from=cronjob/grep
+
+# Verify
+kubectl get cronjob grep
+kubectl get job grep-test
+kubectl logs job/grep-test

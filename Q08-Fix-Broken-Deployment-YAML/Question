@@ -1,0 +1,6 @@
+File `/root/broken-deploy.yaml` contains a Deployment manifest that fails to apply.
+
+Tasks:
+1. Update apiVersion to apps/v1.
+2. Add missing selector field.
+3. Apply the fixed manifest.

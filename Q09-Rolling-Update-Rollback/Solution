@@ -1,0 +1,13 @@
+# Update
+kubectl set image deploy/app-v1 nginx=nginx:1.25
+kubectl rollout status deploy/app-v1
+
+# Check history
+kubectl rollout history deploy app-v1
+
+# Rollback
+kubectl rollout undo deploy/app-v1
+kubectl rollout status deploy/app-v1
+
+# Verify
+kubectl get deploy app-v1 -o jsonpath='{.spec.template.spec.containers[0].image}'
