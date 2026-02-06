@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2026-02-06T16:35:26Z"
+  name: wrong-sa
+  namespace: monitoring
+  resourceVersion: "19618"
+  uid: dd2fb648-75e8-4ba2-8c84-ca0784ec3b7a

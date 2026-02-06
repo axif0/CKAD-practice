@@ -19,7 +19,7 @@ TOTAL_SKIPPED=0
 DIRS=$(find "$BASE_DIR" -maxdepth 1 -type d -name "Q*" | sort)
 
 for dir in $DIRS; do
-    QUESTION=$(basename "$dir")
+    QUESTION=$(basename "$dir1")
     CHECK_SCRIPT="$dir/check.sh"
     
     if [[ -f "$CHECK_SCRIPT" ]]; then

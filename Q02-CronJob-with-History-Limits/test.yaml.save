@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: backup-job
+spec:
+  schedule: "/30 * * * *"
+  jobTemplate:
+    spec:
+ ~/Dow/CKAD-2025-normalized/Q02-CronJob-with-History-Limits | master !4 ?1  k apply -f test.yaml         1m 58s 
+Error from server (BadRequest): error when creating "test.yaml": CronJob in version "v1" cannot be handled as a CronJob: strict decoding error: unknown field "spec.jobTemplate.spec.template.spec.failedJobsHistoryLimit", unknown field "spec.jobTemplate.spec.template.spec.successfulJobsHistoryLimit"
+
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox:latest
+            imagePullPolicy: IfNotPresent
+            command:
+            - echo "Backup complete"
+          successfulJobsHistoryLimit: 3
+          failedJobsHistoryLimit: 2
+          activeDeadlineSeconds: 300
+          restartPolicy: Never
+

@@ -10,7 +10,7 @@ FAIL=0
 
 # Check 1: Pod exists
 echo -n "[Check 1] Pod exists and is running: "
-POD_STATUS=$(kubectl get pod -n default -o jsonpath='{.items[0].status.phase}' 2>/dev/null)
+POD_STATUS=$(kubectl get pod metrics-pod -n monitoring -o jsonpath='{.status.phase}' 2>/dev/null)
 if [[ "$POD_STATUS" == "Running" ]]; then
     echo "✅ PASS"
     ((PASS++))
@@ -21,7 +21,7 @@ fi
 
 # Check 2: Pod uses correct ServiceAccount
 echo -n "[Check 2] Pod uses the correct ServiceAccount: "
-SA_NAME=$(kubectl get pod -n default -o jsonpath='{.items[0].spec.serviceAccountName}' 2>/dev/null)
+SA_NAME=$(kubectl get pod metrics-pod -n monitoring -o jsonpath='{.spec.serviceAccountName}' 2>/dev/null)
 if [[ -n "$SA_NAME" && "$SA_NAME" != "default" ]]; then
     echo "✅ PASS (using: $SA_NAME)"
     ((PASS++))
