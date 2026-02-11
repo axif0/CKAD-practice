@@ -3,8 +3,8 @@ kubectl get pods --show-labels
 kubectl get svc web-svc -o yaml
 kubectl get endpoints web-svc
 
-# Fix selector
-kubectl patch svc web-svc -p '{"spec":{"selector":{"app":"webapp"}}}'
+# Fix selector to match pod labels (app=web-app)
+kubectl patch svc web-svc -p '{"spec":{"selector":{"app":"web-app"}}}'
 
 # Verify
 kubectl get endpoints web-svc

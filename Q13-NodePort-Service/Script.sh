@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
-
+echo "[+] Cleaning up existing resources (if any)"
+kubectl delete deployment api-server --ignore-not-found=true
+ 
 echo "[+] Creating Deployment"
 
 kubectl create deploy api-server --image=nginx --replicas=1

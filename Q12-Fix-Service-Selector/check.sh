@@ -19,9 +19,9 @@ else
 fi
 
 # Check 2: Service selector is correct
-echo -n "[Check 2] Service selector is 'app=webapp': "
+echo -n "[Check 2] Service selector is 'app=web-app': "
 SELECTOR=$(kubectl get svc web-svc -o jsonpath='{.spec.selector.app}' 2>/dev/null)
-if [[ "$SELECTOR" == "webapp" ]]; then
+if [[ "$SELECTOR" == "web-app" ]]; then
     echo "✅ PASS"
     ((PASS++))
 else

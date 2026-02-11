@@ -20,7 +20,7 @@ fi
 
 # Check 2: Deployment has correct apiVersion
 echo -n "[Check 2] YAML has apiVersion 'apps/v1': "
-if grep -q "apiVersion: apps/v1" /root/broken-deploy.yaml 2>/dev/null; then
+if grep -q "apiVersion: apps/v1" /home/asif/Downloads/CKAD-2025-normalized/Q08-Fix-Broken-Deployment-YAML/mama.yaml 2>/dev/null; then
     echo "✅ PASS"
     ((PASS++))
 else
@@ -30,7 +30,7 @@ fi
 
 # Check 3: Deployment has selector
 echo -n "[Check 3] YAML has selector field: "
-if grep -q "selector:" /root/broken-deploy.yaml 2>/dev/null; then
+if grep -q "selector:" /home/asif/Downloads/CKAD-2025-normalized/Q08-Fix-Broken-Deployment-YAML/mama.yaml 2>/dev/null; then
     echo "✅ PASS"
     ((PASS++))
 else

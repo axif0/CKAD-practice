@@ -31,7 +31,7 @@ fi
 
 # Check 3: YAML file is fixed
 echo -n "[Check 3] YAML file has valid pathType: "
-if grep -qE "pathType: (Prefix|Exact|ImplementationSpecific)" /root/fix-ingress.yaml 2>/dev/null; then
+if grep -qE "pathType: (Prefix|Exact|ImplementationSpecific)" mama.yaml 2>/dev/null; then
     echo "✅ PASS"
     ((PASS++))
 else

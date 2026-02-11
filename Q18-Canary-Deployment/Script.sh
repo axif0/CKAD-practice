@@ -32,7 +32,8 @@ spec:
   selector:
     app: web
   ports:
-  - port: 80
+  - name: http
+    port: 80
     targetPort: 80
 EOF
 

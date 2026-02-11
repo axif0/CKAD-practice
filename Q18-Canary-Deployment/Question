@@ -1,5 +1,18 @@
-Implement a canary release:
-- Stable: nginx:1.14, 3 replicas
-- Canary: nginx:1.16, 1 replica
-- Both must share label app=web
-- Both must be served by existing Service (do not modify Service)
+Canary Deployment
+==================
+
+Implement a canary release for the web application:
+
+Requirements:
+1. Scale the existing 'web-stable' deployment to 3 replicas
+2. Create a new deployment named 'web-canary' with:
+   - Image: nginx:1.16
+   - Replicas: 1
+   - Labels: app=web and version=canary
+3. Ensure both deployments share the label app=web so they are served by the existing Service 'web-svc'
+4. Do NOT modify the Service
+
+Verification:
+- Total of 4 pods should be running (3 stable + 1 canary)
+- Service should route traffic to all 4 pods (75% stable, 25% canary)
+- Check endpoints: kubectl get endpoints web-svc

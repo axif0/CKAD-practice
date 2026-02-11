@@ -1,5 +1,3 @@
-# Fix the file
-cat <<EOF > /root/broken-deploy.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,10 +15,3 @@ spec:
       containers:
         - name: web
           image: nginx
-EOF
-
-kubectl apply -f /root/broken-deploy.yaml
-
-# Verify
-kubectl get deploy broken-app
-kubectl rollout status deploy broken-app
