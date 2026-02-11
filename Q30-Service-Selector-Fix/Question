@@ -1,8 +1,12 @@
-Q17-Task
+In namespace `default`, a Service named `store-svc` exists and the corresponding Pods with label `app=store` are running.
 
-In namespace default, a Service exists and the corresponding Pods are running.
-However, traffic is not reaching the Pods.
+However, traffic is not reaching the Pods — the Service has no endpoints.
 
-Investigate and fix the Service selector so that traffic flows correctly.
+Task:
 
-Do not create new Pods or Services.
+Investigate the Service selector and fix it so that the Service correctly selects the Pods and traffic flows as expected.
+
+Note:
+- Do not create new Pods or Services.
+- Do not modify Pod labels.
+- Only fix the Service selector.

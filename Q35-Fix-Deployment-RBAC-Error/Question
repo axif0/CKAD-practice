@@ -1,11 +1,16 @@
-A Pod within the Deployment named `honeybee-deployment` in namespace `gorilla` is logging errors.
+A Deployment named `honeybee-deployment` in namespace `gorilla` has Pods that are logging RBAC errors.
 
-Look at the logs to identify error messages.
+The error message is:
+`User "system:serviceaccount:gorilla:default" cannot list resource "pods" [...] in the namespace "gorilla"`
 
-Find errors including:
-User "system:serviceaccount:gorilla:default" cannot list resource "pods" [...] in the namespace "gorilla"
+Task:
 
-Update the Deployment `honeybee-deployment` to resolve the errors in the logs of the Pod.
+1. Check the Pod logs to confirm the authorization error.
+2. Identify the correct ServiceAccount that has the required permissions to list Pods in namespace `gorilla`.
+   (Hint: check existing ServiceAccounts and RoleBindings in the namespace)
+3. Update the Deployment `honeybee-deployment` to use the correct ServiceAccount.
 
 Note:
-- The honeybee-deployment's manifest file can be found at /home/candidate/prompt-escargot/honeybee-deployment.yaml
+- The honeybee-deployment's manifest file can be found at `/home/candidate/prompt-escargot/honeybee-deployment.yaml`
+- Do not create new Roles or RoleBindings — the correct ones already exist.
+- Verify that the Pods no longer log authorization errors after the fix.

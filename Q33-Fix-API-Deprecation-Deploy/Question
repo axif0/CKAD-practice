@@ -1,9 +1,14 @@
-Fix any API-deprecation issues in the manifest file
-/home/candidate/credible-mite/web.yaml
-so that the application can be deployed on cluster ckad00026.
+A manifest file located at `/home/candidate/credible-mite/web.yaml` was originally written for Kubernetes v1.15.
 
-Deploy the application specified in the updated manifest file in namespace garfish.
+The current cluster runs Kubernetes v1.29+, and the manifest fails to apply due to deprecated API versions.
+
+Task:
+
+1. Identify and fix all API deprecation issues in the manifest file.
+2. Ensure required fields (such as `spec.selector`) are present for the current API version.
+3. Deploy the application using the updated manifest in namespace `garfish`.
+4. Verify that the Deployment and Service are running successfully.
 
 Note:
-- The application was developed for Kubernetes v1.15.
-- The cluster ckad00026 runs Kubernetes 1.29+.
+- The manifest may contain both Deployment and Service resources.
+- Use `kubectl api-versions` or Kubernetes documentation to identify the correct API versions.

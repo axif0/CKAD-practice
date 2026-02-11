@@ -1,9 +1,15 @@
-First, create a single new Secret named `postgres` in the `relaxed-shark` namespace.
+In namespace `relaxed-shark`, a Deployment named `postgres` exists with hard-coded environment variables containing sensitive data.
 
-It must contain the three pieces of secret information currently hard-coded in 
-Pod environment variables in the Deployment `postgres` running in the `relaxed-shark` namespace.
+Task:
 
-Use the keys: `username`, `database`, and `password`.
+1. Inspect the Deployment to identify the three hard-coded environment variables.
+2. Create a single Secret named `postgres` in namespace `relaxed-shark` containing these values with the keys:
+   - `username`
+   - `database`
+   - `password`
 
-Next, modify the Deployment so that:
-- The environment variables are sourced from the Secret instead of hard-coded values
+3. Modify the Deployment so that the environment variables are sourced from the Secret using `valueFrom.secretKeyRef` instead of hard-coded values.
+
+Note:
+- Do not change the environment variable names in the Deployment (e.g., `POSTGRES_USER`, `POSTGRES_DB`, `POSTGRES_PASSWORD`).
+- Verify that the Secret is created correctly and the Deployment restarts with the updated configuration.

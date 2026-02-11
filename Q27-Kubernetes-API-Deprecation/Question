@@ -1,6 +1,13 @@
-Q10- A team tries to apply the hpa manifest, which was originally created on an older cluster located in ~/ckad-hpa.yaml
+A team has a HorizontalPodAutoscaler manifest that was originally created for an older Kubernetes cluster.
+The manifest file is located at `~/ckad-hpa.yaml`.
+
+When applying it to the current cluster (Kubernetes v1.32), it fails due to deprecated API version and spec format.
 
 Task:
-Identify the correct API version that should be used.
-Update the manifest to work on Kubernetes v1.32
-Verify that the HPA is created successfully.
+
+1. Identify the correct API version for HorizontalPodAutoscaler on Kubernetes v1.32.
+2. Update the manifest to use the correct API version and fix any deprecated fields in the spec.
+3. Apply the updated manifest and verify that the HPA is created successfully.
+
+Note:
+- You may use `kubectl explain` or the Kubernetes documentation to find the correct API version and spec format.

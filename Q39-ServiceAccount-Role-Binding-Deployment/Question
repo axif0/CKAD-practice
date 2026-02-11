@@ -1,6 +1,12 @@
-Create a new ServiceAccount named `scraper` in the namespace `cute-panda`.
+In namespace `cute-panda`, a Deployment named `scraper` exists but its Pods are using the `default` ServiceAccount.
 
-Review the existing Roles in the `cute-panda` namespace, and bind the best-fitting Role
-to the new ServiceAccount `scraper`.
+Task:
 
-Finally, update the `scraper` Deployment to use the new ServiceAccount `scraper`.
+1. Create a new ServiceAccount named `scraper` in namespace `cute-panda`.
+2. Review the existing Roles in namespace `cute-panda` and identify the best-fitting Role for the `scraper` workload.
+3. Create a RoleBinding to bind the identified Role to the new ServiceAccount `scraper`.
+4. Update the `scraper` Deployment to use ServiceAccount `scraper`.
+
+Note:
+- Multiple Roles exist in the namespace — choose the one most appropriate for the workload.
+- Verify that the Deployment's Pods are running with the correct ServiceAccount after the update.

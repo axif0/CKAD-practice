@@ -1,7 +1,15 @@
-A Deployment named `app-deployment` in namespace `prod` runs a web application on port 8081.
+A Deployment named `app-deployment` in namespace `prod` runs a web application on port `8081`.
 
-The Deployment's manifest files can be found at /home/candidate/spicy-pikachu/app-deployment.yaml
+Task:
 
-Modify the Deployment specifying a readiness probe using path /healthz.
+Modify the Deployment to add a readiness probe to the container with the following settings:
 
-Set initialDelaySeconds to 6 and periodSeconds to 3.
+- Probe type: `httpGet`
+- Path: `/healthz`
+- Port: `8081`
+- `initialDelaySeconds`: 6
+- `periodSeconds`: 3
+
+Note:
+- The Deployment's manifest file can be found at `/home/candidate/spicy-pikachu/app-deployment.yaml`
+- Apply the changes and verify the readiness probe configuration by describing the Pod.

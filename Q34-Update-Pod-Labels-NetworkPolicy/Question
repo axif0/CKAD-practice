@@ -1,7 +1,16 @@
-Update the Pod `newpod` in the `charming-macaw` namespace to use a NetworkPolicy
-allowing the Pod to send and receive traffic only to and from the Pods `front` and `db`.
+In namespace `charming-macaw`, a Pod named `newpod` exists along with Pods named `front` and `db`.
+
+A NetworkPolicy named `allow-middle-traffic` already exists and controls traffic flow between these Pods.
+The NetworkPolicy selects Pods using a specific label.
+
+Currently, `newpod` cannot send or receive traffic to/from `front` and `db`.
+
+Task:
+
+Update the labels on Pod `newpod` so that it is selected by the `allow-middle-traffic` NetworkPolicy, allowing it to send and receive traffic to and from the `front` and `db` Pods.
 
 Note:
 - All required NetworkPolicies have already been created.
-- You must not create, delete, or edit any NetworkPolicy resources.
+- You must NOT create, delete, or edit any NetworkPolicy resources.
 - You may only modify Pod labels.
+- Use `kubectl describe netpol` to identify the required label.

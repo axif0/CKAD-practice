@@ -1,6 +1,13 @@
-Update the proportional scaling configuration of the Deployment `webapp` in the `prod` namespace
-setting maxSurge to 5% and maxUnavailable to 5%.
+In namespace `prod`, a Deployment named `webapp` exists running the `lfccncf/nginx` container image.
 
-Update the `webapp` Deployment to use version tag `1.13` for the lfccncf/nginx container image.
+Perform the following tasks in order:
 
-Perform a rollback of the `webapp` Deployment to its previous version.
+1. Update the rolling update strategy of the `webapp` Deployment:
+   - `maxSurge`: 5%
+   - `maxUnavailable`: 5%
+
+2. Update the `webapp` Deployment to use image version `lfccncf/nginx:1.13`.
+
+3. Rollback the `webapp` Deployment to its previous version.
+
+Verify the rollout status and the final image version after rollback.

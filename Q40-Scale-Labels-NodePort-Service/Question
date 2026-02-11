@@ -1,6 +1,15 @@
-First, update the Deployment `nginx-deployment` in the `prod` namespace:
-- to run 2 replicas of the Pod
-- add the following label to the Pod: role: webFrontEnd
+In namespace `prod`, a Deployment named `nginx-deployment` exists.
 
-Next, create a NodePort Service named `rover` in the `prod` namespace exposing
-the `nginx-deployment` Deployment's Pods.
+Perform the following tasks:
+
+1. Scale the Deployment to `2` replicas.
+2. Add the label `role=webFrontEnd` to the Pod template metadata.
+
+Next, create a NodePort Service in namespace `prod` with the following specifications:
+
+- Name: `rover`
+- Type: `NodePort`
+- Port: `80`
+- The Service must expose the `nginx-deployment` Pods
+
+Verify that the Service has endpoints and the Pods are accessible.

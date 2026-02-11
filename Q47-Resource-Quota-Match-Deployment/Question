@@ -1,15 +1,16 @@
-Update the `nginx-resources` Deployment in the namespace with the following resource settings:
+In namespace `resource-test`, a Deployment named `nginx-resources` exists and a ResourceQuota named `compute-quota` is configured.
 
-Requests:
-- 100m CPU requests
-- 128Mi memory requests
+Task:
 
-Limits:
-- Set the limits to double the resource requests for CPU and memory
+1. Update the `nginx-resources` Deployment with the following resource settings:
+   - CPU request: `100m`
+   - Memory request: `128Mi`
+   - CPU limit: `200m` (double the CPU request)
+   - Memory limit: `256Mi` (double the memory request)
 
-Next, ensure that the total amount of resources in the namespace matches 
-the maximum resources the Pods from the `nginx-resources` Deployment can request.
+2. Update the ResourceQuota `compute-quota` so that the total allowed resources in the namespace exactly match the maximum resources the Pods from the `nginx-resources` Deployment can consume.
+   (Hint: multiply per-Pod limits by the number of replicas)
 
 Note:
-- Do not delete the existing Deployment
-- Failure to do so will result in a reduced score
+- Do NOT delete the existing Deployment.
+- Verify that both the Deployment Pods and ResourceQuota are correctly configured.

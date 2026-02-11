@@ -1,19 +1,16 @@
-Q5- You need to scale an existing deploy for availability and creating a service to expose the deployment within your infrastructure.
+A Deployment named `nov2025-deployment` has already been deployed to the namespace `nov2025`.
 
 Task:
 
-Start with the deployment named nov2025-deployment which has already been deployed to the namespace nov2025.
+1. Scale the Deployment to `4` replicas.
+2. Add the label `func=webFrontend` to the Pod template metadata.
 
-Add the func=webFrontend key/value label to the pod template metadata to identify the pod for the service definition
+Next, create a Service in namespace `nov2025` with the following specifications:
 
-Have 4 replicas
+- Name: `berry`
+- Type: `NodePort`
+- Protocol: TCP
+- Port: `8080`
+- The Service must select Pods from the `nov2025-deployment` using the label `func=webFrontend`
 
-
-
-Next, create and deploy in namespace nov2025 a service that accomplishes the following:
-
-Is of type NodePort & name of Berry
-
-Exposes the service on TCP port 8080
-
-Mapped to pods defined by the specification of nov2025-deployment
+Verify that the Service has endpoints pointing to all 4 Pods.

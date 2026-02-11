@@ -1,10 +1,17 @@
-The Pod for the Deployment named `nosql` in the `haddock` namespace fails to start
-because its Container runs out of resources.
+The Pod for the Deployment named `nosql` in namespace `haddock` fails to start because its container exceeds the namespace resource constraints.
 
-Update the `nosql` Deployment so that the Container:
-- requests 128Mi of memory
-- limits the memory to half the maximum memory constraint set for the `haddock` namespace
+Task:
+
+Update the `nosql` Deployment so that the container has the following resource settings:
+
+- Memory request: `128Mi`
+- Memory limit: half the maximum memory constraint set for the `haddock` namespace
+
+Steps:
+1. Check the LimitRange in namespace `haddock` to find the maximum memory constraint.
+2. Calculate half of that value and set it as the memory limit.
+3. Apply the updated manifest.
 
 Note:
-- The nosql Deployment's manifest file can be found at /home/candidate/chief-cardinal/nosql.yaml
-- Check LimitRange in haddock namespace to find max memory constraint
+- The nosql Deployment's manifest file can be found at `/home/candidate/chief-cardinal/nosql.yaml`
+- Verify that the Pod starts successfully after the update.

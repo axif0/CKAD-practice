@@ -1,24 +1,19 @@
-Q15-Task
-
-In namespace default, a Deployment for a web application already exists.
+In namespace `default`, a Deployment named `web-stable` and a Service named `web-svc` already exist.
 
 Implement a canary release for the application using replica-based traffic splitting.
 
 Requirements:
 
-The stable deployment must:
-Use image nginx:1.14
-Run 3 replicas
+1. The stable Deployment (`web-stable`) must:
+   - Use image `nginx:1.14`
+   - Run `3` replicas
+   - Have label `app=web` in its Pod template
 
-The canary deployment must:
-Use image nginx:1.16
-Run 1 replica
+2. Create a new canary Deployment named `web-canary` that:
+   - Uses image `nginx:1.16`
+   - Runs `1` replica
+   - Has label `app=web` in its Pod template (same as stable)
 
-Both deployments must:
-Share the same application selector:
-app=web
+3. Do not modify the Service `web-svc`. The Service selects on `app=web`, so both Deployments' Pods will automatically receive traffic.
 
-Be exposed by the same Service
-Do not modify the Service.
-
-Ensure traffic is split proportionally based on the number of replicas.
+Verify that the Service endpoints include all 4 Pods (3 stable + 1 canary).

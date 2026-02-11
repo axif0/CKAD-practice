@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Create the directory for the Dockerfile
-mkdir -p "$HOME/home"
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Create an empty (or placeholder) Dockerfile at the expected path
-cat <<'EOF' > "$HOME/home/Dockerfile"
+# Create an empty (or placeholder) Dockerfile in the Q19 directory
+cat <<'EOF' > "$SCRIPT_DIR/Dockerfile"
 # Placeholder Dockerfile for CKAD practice
 # You can replace its contents when performing the actual task.
 FROM alpine:3.18
 CMD ["echo", "Sample placeholder Dockerfile"]
 EOF
 
-echo "Created Dockerfile at: $HOME/home/Dockerfile"
+echo "Created Dockerfile at: $SCRIPT_DIR/Dockerfile"
 
 # Create the target directory for the OCI tar export
 # NOTE: The question uses a path starting with '-' which is invalid.

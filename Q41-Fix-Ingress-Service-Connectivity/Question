@@ -1,14 +1,19 @@
-A Deployment named `content-marlin-deployment`, running in namespace `content-marlin`
-is exposed via Ingress `content-marlin-ingress`.
+A Deployment named `content-marlin-deployment` running in namespace `content-marlin` is exposed via an Ingress named `content-marlin-ingress`.
 
-The manifest files for the Deployment, Service and Ingress can be found at
-/home/candidate/content-marlin/
+The Deployment is supposed to be reachable at:
+`http://content-marlin.local/content-marlin`
 
-The Deployment is supposed to be reachable at http://content-marlin.local/content-marlin
-but requesting this URL is currently returning an error.
+However, requesting this URL currently returns an error.
 
-Identify and fix the problems by updating the associated resources so that the
-Deployment becomes externally reachable as planned.
+Task:
+
+Identify and fix the problems in the Service and/or Ingress so that the Deployment becomes externally reachable as planned.
+
+The manifest files for the Deployment, Service, and Ingress can be found at:
+`/home/candidate/content-marlin/`
 
 Note:
-- Don't modify the Deployment; you can modify Service and Ingress.
+- Do NOT modify the Deployment.
+- You may only modify the Service and/or Ingress.
+- Common issues include: incorrect Service selector, wrong port mapping, or mismatched Ingress backend service name/port.
+- Verify that the Service has endpoints after fixing.

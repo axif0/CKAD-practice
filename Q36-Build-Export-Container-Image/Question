@@ -1,9 +1,15 @@
-A Dockerfile has been prepared at /home/candidate/build/Dockerfile.
+A Dockerfile has been prepared at `/home/candidate/build/Dockerfile`.
 
-Using the prepared Dockerfile, build a container image with the name `macaque` and tag `1.2`.
-You may install and use the tool of your choice.
+Task:
+
+1. Using the prepared Dockerfile, build a container image with the name `macaque` and tag `1.2`.
+   You may use the tool of your choice.
+
+2. Export the built container image in OCI or Docker image format and store it at:
+   `/home/candidate/macaque-1.2.tar`
 
 Note:
-- Multiple image builders and tools have been pre-installed: docker, skopeo, buildah, img, and podman.
-- Please do not push the built image to a registry, run a container, or otherwise consume it.
-- Using the tool of your choice, export the built container image in OCI or Docker image format and store it at /home/candidate/macaque-1.2.tar
+- Multiple image builders and tools have been pre-installed: `docker`, `skopeo`, `buildah`, `img`, and `podman`.
+- Do NOT push the built image to a registry.
+- Do NOT run a container from the image.
+- Verify that the tar file exists after export.

@@ -1,8 +1,11 @@
-Update the existing Deployment `busybox` running in the namespace `rapid-goat`.
+An existing Deployment named `busybox` is running in namespace `rapid-goat`.
 
-Do not delete the existing Deployment. Failure to do so will result in a zero score.
+Do NOT delete the existing Deployment. Failure to do so will result in a zero score.
 
 Tasks:
-1. First, change the container name to `musl`
-2. Next, change the container image to `busybox:musl`
-3. Finally, ensure that the changes to the `busybox` Deployment are rolled out
+
+1. Change the container name to `musl`.
+2. Change the container image to `busybox:musl`.
+3. Ensure the changes are rolled out successfully.
+
+Verify the rollout status and confirm the updated container name and image.

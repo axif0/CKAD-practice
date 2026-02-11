@@ -1,7 +1,8 @@
-Modify the existing Deployment named `store-deployment`, running in namespace `grubworm`,
-so that its containers:
-- run with user ID 10000 and
-- have the NET_BIND_SERVICE capability added
+Modify the existing Deployment named `store-deployment` running in namespace `grubworm` so that its containers:
+
+1. Run with user ID `10000` (set at Pod-level `securityContext.runAsUser`)
+2. Have the `NET_BIND_SERVICE` capability added (set at container-level `securityContext.capabilities.add`)
 
 Note:
-- The store-deployment's manifest file can be found at /home/candidate/daring-moccasin/store-deployment.yaml
+- The store-deployment's manifest file can be found at `/home/candidate/daring-moccasin/store-deployment.yaml`
+- Apply the changes and verify the securityContext is correctly set on the running Pods.

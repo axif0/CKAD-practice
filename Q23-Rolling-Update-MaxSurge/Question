@@ -1,6 +1,13 @@
-Q6- Task:
+In namespace `nov2025`, two Deployments exist: `app` and `web1`.
 
-Please complete the following:
-Update the app deployment in the nov2025 NS with a maxSurge of 5% and a maxUnavailable of 2%
-Perform a rolling update of the web1 deployment, changing the repo/nginx image version to 1.13
-Rollback the app deployment to the previous version
+Perform the following tasks:
+
+1. Update the Deployment `app` with a rolling update strategy:
+   - `maxSurge`: 5%
+   - `maxUnavailable`: 2%
+
+2. Perform a rolling update of the Deployment `web1`, changing its `nginx` container image to `nginx:1.13`.
+
+3. Rollback the Deployment `app` to its previous version.
+
+Verify each change by checking rollout status and deployment details.
