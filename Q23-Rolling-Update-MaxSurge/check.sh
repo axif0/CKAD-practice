@@ -30,10 +30,10 @@ else
     ((FAIL++))
 fi
 
-# Check 3: Deployment 'web1' uses nginx:1.13
-echo -n "[Check 3] Deployment 'web1' uses nginx:1.13 image: "
+# Check 3: Deployment 'web1' is rolled back to nginx:1.12
+echo -n "[Check 3] Deployment 'web1' rolled back to nginx:1.12 image: "
 IMAGE=$(kubectl get deploy web1 -n nov2025 -o jsonpath='{.spec.template.spec.containers[0].image}' 2>/dev/null)
-if [[ "$IMAGE" == *"nginx:1.13"* || "$IMAGE" == "nginx:1.13" ]]; then
+if [[ "$IMAGE" == *"nginx:1.12"* || "$IMAGE" == "nginx:1.12" ]]; then
     echo "✅ PASS"
     ((PASS++))
 else
@@ -41,9 +41,9 @@ else
     ((FAIL++))
 fi
 
-# Check 4: Deployment 'app' has rollout history
-echo -n "[Check 4] Deployment 'app' has rollout history (rollback done): "
-REVISIONS=$(kubectl rollout history deploy/app -n nov2025 2>/dev/null | grep -c "^[0-9]")
+# Check 4: Deployment 'web1' has rollout history
+echo -n "[Check 4] Deployment 'web1' has rollout history (update+rollback done): "
+REVISIONS=$(kubectl rollout history deploy/web1 -n nov2025 2>/dev/null | grep -c "^[0-9]")
 if [[ $REVISIONS -ge 2 ]]; then
     echo "✅ PASS ($REVISIONS revisions)"
     ((PASS++))

@@ -4,7 +4,9 @@ Task:
 
 1. Create a new ServiceAccount named `scraper` in namespace `cute-panda`.
 2. Review the existing Roles in namespace `cute-panda` and identify the best-fitting Role for the `scraper` workload.
+
 3. Create a RoleBinding to bind the identified Role to the new ServiceAccount `scraper`.
+
 4. Update the `scraper` Deployment to use ServiceAccount `scraper`.
 
 Note:

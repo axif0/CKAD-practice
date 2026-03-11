@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: "2026-03-10T12:48:47Z"
+  generation: 1
+  name: grep
+  namespace: default
+  resourceVersion: "174311"
+  uid: b6857ba5-baf1-4099-af33-a0c8ca0d6d67
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 192
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 8
+      template:
+        spec:
+          containers:
+          - name: busybox
+            image: busybox:stable
+            command: ["grep", "-i", "nameserver", "/etc/resolv.conf"]
+          restartPolicy: Never
+  schedule: '*/30 * * * *'
+  successfulJobsHistoryLimit: 96
+  suspend: false
+status:
+  lastScheduleTime: "2026-03-10T12:51:00Z"
+  lastSuccessfulTime: "2026-03-10T12:51:03Z"

@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: backup-job
+spec:
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 2
+
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: backup-job
+
+    spec:
+      activeDeadlineSeconds: 300
+
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - command:
+            - /bin/sh
+            - -c
+            - echo "Backup completed"
+            image: busybox:latest
+            name: backup-job
+            resources: {}
+          restartPolicy: Never
+  schedule: '*/30 * * * *'
+status: {}

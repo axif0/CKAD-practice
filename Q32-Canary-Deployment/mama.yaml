@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"web-stable","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"web","version":"stable"}},"template":{"metadata":{"labels":{"app":"web","version":"stable"}},"spec":{"containers":[{"image":"nginx:1.14","name":"nginx","ports":[{"containerPort":80}]}]}}}}
+  creationTimestamp: "2026-02-11T15:11:14Z"
+  generation: 3
+  name: web-stable
+  namespace: default
+  resourceVersion: "126868"
+  uid: a2e0049b-6419-4b1b-98b1-5c70e63b3645
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: web
+      version: stable
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: web
+        version: stable
+    spec:
+      containers:
+      - image: nginx:1.14
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2026-03-06T10:45:17Z"
+    lastUpdateTime: "2026-03-06T10:45:17Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2026-02-11T15:11:14Z"
+    lastUpdateTime: "2026-03-06T10:58:51Z"
+    message: ReplicaSet "web-stable-d5bdf8d85" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 3
+  readyReplicas: 1
+  replicas: 3
+  updatedReplicas: 1

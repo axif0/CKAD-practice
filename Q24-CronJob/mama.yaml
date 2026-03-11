@@ -1,0 +1,43 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: "2026-02-24T17:20:08Z"
+  generation: 1
+  name: log-cleaner
+  namespace: production
+  resourceVersion: "103673"
+  uid: 55ad0f57-a470-43b2-8ffe-f49f55109250
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: log-cleaner
+    spec:
+      backoffLimit: 3
+      completions: 2
+      activeDeadlineSeconds: 30
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+
+          containers:
+          - image: busybox
+            imagePullPolicy: Always
+            name: log
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+
+
+  schedule: '*/30 * * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false
+status: {}

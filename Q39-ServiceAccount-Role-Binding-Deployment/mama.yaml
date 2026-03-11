@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"scraper","namespace":"cute-panda"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"scraper"}},"template":{"metadata":{"labels":{"app":"scraper"}},"spec":{"containers":[{"args":["while true; do kubectl get pods -n cute-panda; sleep 10; done"],"command":["/bin/sh","-c"],"image":"bitnami/kubectl:latest","name":"scraper"}]}}}}
+  creationTimestamp: "2026-03-09T10:32:57Z"
+  generation: 2
+  name: scraper
+  namespace: cute-panda
+  resourceVersion: "149658"
+  uid: aab9569a-bf3e-418d-a3ed-a2eb56da6464
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: scraper
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: scraper
+    spec:
+      serviceAccountName: scraper
+
+      containers:
+      - args:
+        - while true; do kubectl get pods -n cute-panda; sleep 10; done
+        command:
+        - /bin/sh
+        - -c
+        image: bitnami/kubectl:latest
+        imagePullPolicy: Always
+        name: scraper
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccountName: scraper
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2026-03-09T10:33:05Z"
+    lastUpdateTime: "2026-03-09T10:33:05Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2026-03-09T10:32:57Z"
+    lastUpdateTime: "2026-03-09T10:54:06Z"
+    message: ReplicaSet "scraper-7f4f64b5cf" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

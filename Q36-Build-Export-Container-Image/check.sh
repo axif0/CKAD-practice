@@ -19,14 +19,14 @@ else
 fi
 
 # Check 2: Tarball exists
-echo -n "[Check 2] Tarball exists at '/home/candidate/macaque-1.2.tar': "
-if [[ -f /home/candidate/macaque-1.2.tar ]]; then
+echo -n "[Check 2] Tarball exists at 'macaque-1.2.tar': "
+if [[ -f macaque-1.2.tar ]]; then
     echo "✅ PASS"
     ((PASS++))
     
     # Check 3: Tarball is not empty
     echo -n "[Check 3] Tarball is not empty: "
-    SIZE=$(stat -c%s /home/candidate/macaque-1.2.tar 2>/dev/null)
+    SIZE=$(stat -c%s macaque-1.2.tar 2>/dev/null)
     if [[ $SIZE -gt 0 ]]; then
         echo "✅ PASS (size: $SIZE bytes)"
         ((PASS++))

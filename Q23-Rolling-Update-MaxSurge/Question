@@ -8,6 +8,6 @@ Perform the following tasks:
 
 2. Perform a rolling update of the Deployment `web1`, changing its `nginx` container image to `nginx:1.13`.
 
-3. Rollback the Deployment `app` to its previous version.
+3. Rollback the Deployment `web1` to its previous version.
 
 Verify each change by checking rollout status and deployment details.
