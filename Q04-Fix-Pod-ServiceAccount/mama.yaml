@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: "2026-02-06T16:35:26Z"
+  creationTimestamp: "2026-04-05T15:31:17Z"
   labels:
     run: metrics-pod
   name: metrics-pod
   namespace: monitoring
-  resourceVersion: "19634"
-  uid: 3bfc07e1-27d6-47d5-95f0-e328f42e6647
+  resourceVersion: "228260"
+  uid: 96b71fb4-e095-47fd-8a12-533127ee2cb8
 spec:
   containers:
   - image: nginx
@@ -18,7 +18,7 @@ spec:
     terminationMessagePolicy: File
     volumeMounts:
     - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: kube-api-access-j9nlk
+      name: kube-api-access-fdd6z
       readOnly: true
   dnsPolicy: ClusterFirst
   enableServiceLinks: true
@@ -28,8 +28,8 @@ spec:
   restartPolicy: Always
   schedulerName: default-scheduler
   securityContext: {}
-  serviceAccount: monitor-sa
-  serviceAccountName: monitor-sa
+  serviceAccount: wrong-sa
+  serviceAccountName: wrong-sa
   terminationGracePeriodSeconds: 30
   tolerations:
   - effect: NoExecute
@@ -41,7 +41,7 @@ spec:
     operator: Exists
     tolerationSeconds: 300
   volumes:
-  - name: kube-api-access-j9nlk
+  - name: kube-api-access-fdd6z
     projected:
       defaultMode: 420
       sources:
@@ -62,29 +62,29 @@ spec:
 status:
   conditions:
   - lastProbeTime: null
-    lastTransitionTime: "2026-02-06T16:35:31Z"
+    lastTransitionTime: "2026-04-05T15:31:21Z"
     status: "True"
     type: PodReadyToStartContainers
   - lastProbeTime: null
-    lastTransitionTime: "2026-02-06T16:35:26Z"
+    lastTransitionTime: "2026-04-05T15:31:17Z"
     status: "True"
     type: Initialized
   - lastProbeTime: null
-    lastTransitionTime: "2026-02-06T16:35:31Z"
+    lastTransitionTime: "2026-04-05T15:31:21Z"
     status: "True"
     type: Ready
   - lastProbeTime: null
-    lastTransitionTime: "2026-02-06T16:35:31Z"
+    lastTransitionTime: "2026-04-05T15:31:21Z"
     status: "True"
     type: ContainersReady
   - lastProbeTime: null
-    lastTransitionTime: "2026-02-06T16:35:26Z"
+    lastTransitionTime: "2026-04-05T15:31:17Z"
     status: "True"
     type: PodScheduled
   containerStatuses:
-  - containerID: docker://cc119931e674fb2bcdfbd14d31f7802a50e3bedafbb74d6796950e2fd9d94d56
+  - containerID: docker://47156a4206c38b95599dc30f66031348ae9aa3145cb34b017c9b1c02f8d2fbc0
     image: nginx:latest
-    imageID: docker-pullable://nginx@sha256:341bf0f3ce6c5277d6002cf6e1fb0319fa4252add24ab6a0e262e0056d313208
+    imageID: docker-pullable://nginx@sha256:7150b3a39203cb5bee612ff4a9d18774f8c7caf6399d6e8985e97e28eb751c18
     lastState: {}
     name: metrics-pod
     ready: true
@@ -92,18 +92,18 @@ status:
     started: true
     state:
       running:
-        startedAt: "2026-02-06T16:35:31Z"
+        startedAt: "2026-04-05T15:31:21Z"
     volumeMounts:
     - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: kube-api-access-j9nlk
+      name: kube-api-access-fdd6z
       readOnly: true
       recursiveReadOnly: Disabled
   hostIP: 192.168.49.2
   hostIPs:
   - ip: 192.168.49.2
   phase: Running
-  podIP: 10.244.0.28
+  podIP: 10.244.5.223
   podIPs:
-  - ip: 10.244.0.28
+  - ip: 10.244.5.223
   qosClass: BestEffort
-  startTime: "2026-02-06T16:35:26Z"
+  startTime: "2026-04-05T15:31:17Z"

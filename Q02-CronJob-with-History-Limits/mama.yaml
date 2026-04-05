@@ -1,1 +1,43 @@
-cronjob.batch/backup-job created
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: "2026-04-05T13:12:04Z"
+  generation: 1
+  name: backup-job
+  namespace: default
+  resourceVersion: "225513"
+  uid: 13c4f273-226d-42ba-9c8f-c6da6dffc689
+spec:
+  concurrencyPolicy: Allow
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: backup-job
+    spec:
+      activeDeadlineSeconds: 300
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - command:
+            - /bin/sh
+            - -c
+            - echo Backup completed
+            image: busybox:latest
+            imagePullPolicy: Always
+            name: backup-job
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+
+  schedule: '*/30 * * * *'
+  successfulJobsHistoryLimit: 3
+  suspend: false
+status: {}

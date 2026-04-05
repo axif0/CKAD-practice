@@ -19,7 +19,7 @@ spec:
     type: Container
 EOF
 
-mkdir -p /home/candidate/chief-cardinal
+sudo mkdir -p /home/candidate/chief-cardinal
 
 cat <<EOF > /home/candidate/chief-cardinal/nosql.yaml
 apiVersion: apps/v1

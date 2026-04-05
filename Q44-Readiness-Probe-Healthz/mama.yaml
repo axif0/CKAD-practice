@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nosql
-  namespace: haddock
+  name: app-deployment
+  namespace: prod
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nosql
+      app: myapp
   template:
     metadata:
       labels:
-        app: nosql
+        app: myapp
     spec:
       containers:
-      - name: redis
-        image: redis
+      - name: app
+        image: nginx
         ports:
-        - containerPort: 6379 
+        - containerPort: 8081
